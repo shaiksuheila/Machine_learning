@@ -1,0 +1,58 @@
+##naive bayes
+import pandas as pd
+
+###import dataset
+names=[]
+for i in 'abcdefghijklmno':
+    names.append(i)
+
+
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/income.csv',
+                 names=names)
+
+
+###replace with particular value
+data['b']=data['b'].replace(to_replace=' ?',
+                            value=' Private')
+
+data['g']=data['g'].replace(to_replace=' ?',
+                            value=' Prof-specialty')
+
+data['n']=data['n'].replace(to_replace=' ?',
+                            value=' United-States')
+
+print(data)
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+##
+
+for i in 'bdfghijn':
+    data[i]=le.fit_transform(data[i])
+
+#data['o']=le.fit_transform(data['o'])
+
+
+##converts into matrix form
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+
+
+##
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.20,random_state=6)
+
+
+from sklearn.ensemble import RandomForestClassifier
+model=RandomForestClassifier()
+#entropy:
+#ginni:randomness of 
+model.fit(xtrain,ytrain)
+
+
+ypred=model.predict(xtest)
+
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+
+
+print(model.predict([[39, 6, 77516, 9, 13, 4, 0, 1, 4, 1, 2174, 0, 40, 38]]))
