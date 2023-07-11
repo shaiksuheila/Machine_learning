@@ -1,0 +1,175 @@
+#ALGORITM-1:KNN(K-NEAREST NEIGHBOUR)
+'''
+import pandas as pd
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/bank-additional-full - Copy.csv')
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['job']=le.fit_transform(data['job'])
+data['marital']=le.fit_transform(data['marital'])
+data['education']=le.fit_transform(data['education'])
+data['default']=le.fit_transform(data['default'])
+data['housing']=le.fit_transform(data['housing'])
+data['loan']=le.fit_transform(data['loan'])
+data['contact']=le.fit_transform(data['contact'])
+data['month']=le.fit_transform(data['month'])
+data['day_of_week']=le.fit_transform(data['day_of_week'])
+data['poutcome']=le.fit_transform(data['poutcome'])
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+#in KNN we want to get largest accuracy.....
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier(n_neighbors=1)
+model.fit(xtrain,ytrain)
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+'''
+#THE ACCURACY IS <<88.74726875455208>>
+
+#ALGORITHM-2:DECISION TREE
+'''
+import pandas as pd
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/bank-additional-full - Copy.csv')
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['job']=le.fit_transform(data['job'])
+data['marital']=le.fit_transform(data['marital'])
+data['education']=le.fit_transform(data['education'])
+data['default']=le.fit_transform(data['default'])
+data['housing']=le.fit_transform(data['housing'])
+data['loan']=le.fit_transform(data['loan'])
+data['contact']=le.fit_transform(data['contact'])
+data['month']=le.fit_transform(data['month'])
+data['day_of_week']=le.fit_transform(data['day_of_week'])
+data['poutcome']=le.fit_transform(data['poutcome'])
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+from sklearn.tree import DecisionTreeClassifier
+model=DecisionTreeClassifier(criterion='entropy')#entropy,gini
+model.fit(xtrain,ytrain)
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100
+'''
+#THE ACCURACY FOR ENTROPY <<88.65015780529255>>
+#THE ACCURACY FOR GINI<<88.12818645302258>>
+
+#ALGORITHM-3:RANDOM FOREST
+'''
+import pandas as p
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/bank-additional-full - Copy.csv')
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['job']=le.fit_transform(data['job'])
+data['marital']=le.fit_transform(data['marital'])
+data['education']=le.fit_transform(data['education'])
+data['default']=le.fit_transform(data['default'])
+data['housing']=le.fit_transform(data['housing'])
+data['loan']=le.fit_transform(data['loan'])
+data['contact']=le.fit_transform(data['contact'])
+data['month']=le.fit_transform(data['month'])
+data['day_of_week']=le.fit_transform(data['day_of_week'])
+data['poutcome']=le.fit_transform(data['poutcome'])
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+
+from sklearn.ensemble import RandomForestClassifier
+model=RandomForestClassifier()
+model.fit(xtrain,ytrain)
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+'''
+#THE ACCURACY IS <<90.98082058752124>>
+
+#ALGORITHM-4:NAIVE BAYES
+'''
+import pandas as pd
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/bank-additional-full - Copy.csv')
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['job']=le.fit_transform(data['job'])
+data['marital']=le.fit_transform(data['marital'])
+data['education']=le.fit_transform(data['education'])
+data['default']=le.fit_transform(data['default'])
+data['housing']=le.fit_transform(data['housing'])
+data['loan']=le.fit_transform(data['loan'])
+data['contact']=le.fit_transform(data['contact'])
+data['month']=le.fit_transform(data['month'])
+data['day_of_week']=le.fit_transform(data['day_of_week'])
+data['poutcome']=le.fit_transform(data['poutcome'])
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+from sklearn.naive_bayes import GaussianNB
+model=GaussianNB()
+model.fit(xtrain,ytrain)
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+'''
+#THE ACCURACY IS <<84.57149793639232>>
+
+#ALGORITHM-5:LOGISTIC REGRESSION
+'''
+import pandas as pd
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/bank-additional-full - Copy.csv')
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['job']=le.fit_transform(data['job'])
+data['marital']=le.fit_transform(data['marital'])
+data['education']=le.fit_transform(data['education'])
+data['default']=le.fit_transform(data['default'])
+data['housing']=le.fit_transform(data['housing'])
+data['loan']=le.fit_transform(data['loan'])
+data['contact']=le.fit_transform(data['contact'])
+data['month']=le.fit_transform(data['month'])
+data['day_of_week']=le.fit_transform(data['day_of_week'])
+data['poutcome']=le.fit_transform(data['poutcome'])
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+from sklearn.preprocessing import StandardScaler
+sc_x = StandardScaler()
+xtrain = sc_x.fit_transform(xtrain) 
+xtest = sc_x.transform(xtest)
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 0)
+classifier.fit(xtrain, ytrain)
+y_pred = classifier.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,y_pred)*100)
+'''
+#THE ACCURACY IS <<90.66521000242777>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
