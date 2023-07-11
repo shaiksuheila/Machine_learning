@@ -1,0 +1,42 @@
+import pandas as pd
+import numpy as np
+
+head=['age','workclass','fnlwgt','education','education-num','marital-status','occupation','relationship','race','sex','captial-gain','capital-loss','hours-per-week','native-country','target']
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/income.csv',names=head)
+
+data.shape
+data.size
+data.head()
+data.info()
+data.describe()
+
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['workclass']=le.fit_transform(data['workclass'])
+data['education']=le.fit_transform(data['education'])
+data['marital-status']=le.fit_transform(data['marital-status'])
+data['occupation']=le.fit_transform(data['occupation'])
+data['relationship']=le.fit_transform(data['relationship'])
+data['race']=le.fit_transform(data['race'])
+data['sex']=le.fit_transform(data['sex'])
+data['native-country']=le.fit_transform(data['native-country'])
+
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.3,random_state=9)
+
+
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier(n_neighbors=1)
+model.fit(xtrain,ytrain)
+
+ypred=model.predict(xtest)
+
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+
+print(model.predict([[36,6,28738,7,12,0,12,4,4,0,0,0,35,39]]))
+
+print(model.predict([[52,6,209642,11,9,2,4,0,4,1,0,0,45,39]]))
