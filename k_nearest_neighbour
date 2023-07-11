@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 26 14:12:59 2022
+
+@author: Ibrahim Shaik
+"""
+#STRINGS CONVERT INTO INTEGERS
+import pandas as pd
+
+#appending headers
+a=['buying','maint','doors','persons','lug_boot','safety','class']
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/cars (3).csv',names=a)
+
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['buying']=le.fit_transform(data['buying'])
+data['maint']=le.fit_transform(data['maint'])
+data['lug_boot']=le.fit_transform(data['lug_boot'])
+data['safety']=le.fit_transform(data['safety'])
+
+data['persons'].replace(to_replace='more',value=6,inplace=True)
+data['doors'].replace(to_replace='5more',value=5,inplace=True)
+
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier(n_neighbors=1)
+model.fit(xtrain,ytrain)
+
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+print(model.predict([[3,2,2,4,1,2]]))
