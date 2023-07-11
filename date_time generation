@@ -1,0 +1,86 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Sep 12 14:10:08 2022
+
+@author: Ibrahim Shaik
+"""
+
+import datetime as dt
+#current time and date
+a=dt.datetime.now()
+a
+
+# creating timestamp
+import pandas as pd
+c=pd.to_datetime('10/11/2012 08:02:00')
+
+#it generate dates upto given certain period
+b=pd.date_range('10/11/2012',periods=20)
+b
+
+#adding date to file==note: first run (date nd time) nxt run file.....
+s=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads\cars.csv')
+s['date']=pd.date_range(a,periods=406)
+s
+
+s['date123']=pd.date_range(c,periods=406)
+s
+
+s['diff']=s['date']-s['date123']
+s
+
+
+#separate date,day,month
+s=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads\cars.csv')
+d=pd.to_datetime('10/11/2012 08:02:00')
+s['date']=pd.date_range(d,periods=406)
+s
+
+s['day']=s['date'].dt.day
+s['month']=s['date'].dt.month
+s['year']=s['date'].dt.year
+s['hour']=s['date'].dt.hour
+s['minute']=s['date'].dt.minute
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Sep 12 14:10:08 2022
+
+@author: Ibrahim Shaik
+"""
+
+import datetime as dt
+#current time and date
+a=dt.datetime.now()
+a
+
+# creating timestamp
+import pandas as pd
+c=pd.to_datetime('10/11/2012 08:02:00')
+
+#it generate dates upto given certain period
+b=pd.date_range('10/11/2012',periods=20)
+b
+
+#adding date to file==note: first run (date nd time) nxt run file.....
+s=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads\cars.csv')
+s['date']=pd.date_range(a,periods=406)
+s
+
+s['date123']=pd.date_range(c,periods=406)
+s
+
+s['diff']=s['date']-s['date123']
+s
+
+
+#separate date,day,month
+s=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads\cars.csv')
+d=pd.to_datetime('10/11/2012 08:02:00')
+s['date']=pd.date_range(d,periods=406)
+s
+
+s['day']=s['date'].dt.day
+s['month']=s['date'].dt.month
+s['year']=s['date'].dt.year
+s['hour']=s['date'].dt.hour
+s['minute']=s['date'].dt.minute
