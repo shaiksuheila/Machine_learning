@@ -1,0 +1,54 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 11 14:35:27 2022
+
+@author: Ibrahim Shaik
+"""
+
+import pandas as pd
+import numpy as np
+
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/iris.csv')
+#if downloaded file and working file are in same folder, no need to add the location
+#data=pd.read_csv(r'iris.csv')
+data.shape #no.of rows and columns
+data.size #total no.of elemnts
+data.head() #first 5 rows and columns
+data.tail()#last 5 rows and columns
+data.info() #columns datatype-non-null means no empty space
+data.describe() #basic data of dataset for numerial columns
+#if mean and 50% values are nearly equal then the column is very usefulll
+
+#algoritm wont accept dataframe and series..only accept in matrix and array
+
+
+x=data.iloc[:,:-1]#independent
+y=data.iloc[:,-1]#dependent
+#now the type(x,y) is dataframe and series
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+#type of x and y is matrix
+
+#dividing the data to training and testing 
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.2,random_state=9)
+#random_state: it runs stable values for 9 times to get same accuracy upto 9 times
+#0.2=except 20%data it stores without giving to algorithm
+
+
+#in KNN we want to get largest accuracy.....
+from sklearn.neighbors import KNeighborsClassifier
+model=KNeighborsClassifier(n_neighbors=1)
+#k=1 here we can change anyvalue to increase accuracy
+model.fit(xtrain,ytrain)
+
+ypred=model.predict(xtest)
+from sklearn.metrics import accuracy_score
+print(accuracy_score(ytest,ypred)*100)
+
+
+print(model.predict([[7.3,4.3,5.5,1.9]]))
+#values given between max and min range only to get perfect answer
+
+
+
