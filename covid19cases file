@@ -1,0 +1,62 @@
+
+import pandas as pd
+    #1. READING .CSV FILE
+a=pd.read_csv(r'C:\Users\suheila\Desktop\Data Analysis-AIML\public-covid-19-cases-canada.csv')
+        #2. SUMMARIZATION
+#total rows and columns
+a.shape
+a.index
+        # 3.COLUMN NAMES
+a.columns
+        #4. TYPE OF DATA PRESENT IN EACH COLUMN
+a.dtypes
+        
+        #5. RANGE OF VALUES
+a.describe()  #works only when column consists of numbers
+# under "provincial_case_id" column:
+# min value= 1
+# max value= 25757
+
+        #6. USELESS VALUES
+a.isna().sum()  # gives total no.of empty values in each column 
+# The column "case_id" is completely empty
+a.drop(['case_id'],axis=1,inplace=True)
+# followed by column   "has_travel_history with 49832 empty values"
+a.drop(['has_travel_history'],axis=1,inplace=True)
+# followed by column  "locally_acquired with 50408 empty values"
+a.drop(['locally_acquired'],axis=1,inplace=True)
+a.shape
+
+
+        # 7.DATA PRE-PROCESSING
+a['age'].value_counts() # count of each unique element in age column
+#  since "Not Reported  with 49521 candidates are present so deleting rows are preferrable"
+a.drop(a.index[a['age'] == 'Not Reported'], inplace=True)
+a.shape
+a['sex'].value_counts()  
+# Not Reported    161 : since it is a less number.
+# manipulating "Not Reported" with  "Female" which is maximum number 
+a.replace(to_replace="Not Reported",value="Female",inplace=True)
+a['sex'].value_counts()
+       
+
+        #8. AGE GROUPING
+a['age'].value_counts()
+a.replace(to_replace="<20",value="10-19",inplace=True)
+a.replace(to_replace="<10",value="0-9",inplace=True)
+a.replace(to_replace="<18",value="10-19",inplace=True)
+a.replace(to_replace="<1",value="0-9",inplace=True)
+a.replace(to_replace="2",value="0-9",inplace=True)
+a.replace(to_replace="61",value="60-69",inplace=True)
+a.replace(to_replace="50",value="50-59",inplace=True)
+# age grouping is done 
+            
+
+            # 10.TOTAL NO.OF INFECTED PERSONS FOR EACH AGE GROUP
+a['age'].value_counts() # "gives count of infected persons for each group" 
+a.shape
+
+        # content of a is copied to new csv file
+b=open(r'C:\Users\Gayatri\Desktop\Data Analysis-AIML\new.csv',"w")
+a.to_csv(r'C:\Users\Gayatri\Desktop\Data Analysis-AIML\new.csv')
+b
