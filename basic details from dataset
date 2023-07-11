@@ -1,0 +1,76 @@
+#reading data
+# -*- coding: utf-8 -*-
+"""
+Created on Mon May 15 18:01:22 2023
+
+@author: Ibrahim Shaik
+"""
+#1.reading file
+import pandas as pd
+data = pd.read_csv(r'file_location')
+
+#2.basic details from dataset
+data.shape #no.of rows and columns
+data.size #total no.of elemnts
+data.head() #first 5 rows and columns
+data.tail()#last 5 rows and columns
+data.info() #columns datatype-non-null means no empty space
+data.describe() #basic data of dataset for numerial columns
+#if mean and 50% values are nearly equal then the column is very usefulll
+#9.checking nullvalues
+data.isnull()
+
+(data.isnull()).sum()
+
+(data.isnull()).sum().sum()
+##8.count
+data['sex'].value_counts()
+
+data['age'].value_counts()
+
+#3.adding headers to column
+a=['crim','zn','indus','chas','nox','rm','age','dis','rad','tax','ptratio','b','lstat','medv']
+data=pd.read_csv(r'C:/Users/Ibrahim Shaik/Downloads/boston.csv',names=a)
+
+#4.row deleting:preprossing
+data.dropna(inplace=True)
+
+#5.label encoder :(converting strings to numerial)gives values from 0 to n
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data['buying']=le.fit_transform(data['buying'])
+data['maint']=le.fit_transform(data['maint'])
+data['lug_boot']=le.fit_transform(data['lug_boot'])
+data['safety']=le.fit_transform(data['safety'])
+
+#6.== column with specific va;ue
+data['persons'].replace(to_replace='more',value=6,inplace=True)
+data['doors'].replace(to_replace='5more',value=5,inplace=True)
+
+###==replace with particular value
+data['b']=data['b'].replace(to_replace=' ?',
+                            value=' Private')
+
+data['g']=data['g'].replace(to_replace=' ?',
+                            value=' Prof-specialty')
+
+data['n']=data['n'].replace(to_replace=' ?',
+                            value=' United-States')
+#==replace
+data2['age']=data2['age'].replace('<20','0-19')
+
+data2['age']=data2['age'].replace('10-19','0-19')
+data2['age']=data2['age'].replace('<10','0-19')
+data2['age']=data2['age'].replace('<18','0-19')
+data2['age']=data2['age'].replace('<1','0-19')
+
+
+#7.droping specific column
+data1=data.drop(['ID Tag','Model'],axis=1)
+data1=data1.drop(['Department'],axis=1)
+
+#10.groupby
+a=data.groupby('age').count()
+
+#11.filr to csv
+data.to_csv('file1.csv')
